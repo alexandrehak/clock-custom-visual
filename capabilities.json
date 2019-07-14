@@ -1,0 +1,120 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Measure Data",
+      "name": "measure",
+      "kind": "Measure"
+    }
+  ],
+  "objects": {
+    "dateSettings": {
+      "displayName": "Date Settings",
+      "properties": {
+        "showAllDataPoints": {
+          "displayName": "Show all",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "true",
+                "value": "true"
+              },
+              {
+                "displayName": "false",
+                "value": "false"
+              }
+            ]
+          }
+        },
+        "dateFormat": {
+          "displayName": "Date format",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "DMY",
+                "value": "DMY"
+              },
+              {
+                "displayName": "MDY",
+                "value": "MDY"
+              },
+              {
+                "displayName": "YMD",
+                "value": "YMD"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "clockSettings": {
+      "displayName": "Clock Settings",
+      "properties": {
+        "display": {
+          "displayName": "Display",
+          "displayNameKey": "Clock_Display",
+          "description": "Toggle clock visibility",
+          "type": { "bool": true }
+        }
+      }
+    },
+    "dataPoint": {
+      "displayName": "Data colors",
+      "properties": {
+        "defaultColor": {
+          "displayName": "Default color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "showAllDataPoints": {
+          "displayName": "Show all",
+          "type": {
+            "bool": true
+          }
+        },
+        "fill": {
+          "displayName": "Fill",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "fillRule": {
+          "displayName": "Color saturation",
+          "type": {
+            "fill": {}
+          }
+        },
+        "fontSize": {
+          "displayName": "Text Size",
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "measure": {
+            "max": 1
+          }
+        }
+      ],
+      "single": {
+        "role": "measure"
+      }
+    }
+  ]
+}
