@@ -35,8 +35,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import "./../style/visual.less";
 // React components
-// import App from "./components/app";
-import Clock, { initialState } from "./components/clock";
+import App, { initialState } from "./components/app";
+// import Clock from "./components/clock";
 import { VisualSettings } from "./settings";
 // powerbi
 import DataView = powerbi.DataView;
@@ -59,84 +59,103 @@ export class Visual implements IVisual {
     constructor(options: VisualConstructorOptions) {
         console.log('Visual constructor', options);
         this.target = options.element;
+        
+        // delete this later
         // set date
-        this.date = moment();
+        // this.date = moment();
         // create date element
-        this.dateEl = document.createElement('p');
+        // this.dateEl = document.createElement('p');
         
         // ReactDOM.render(React.createElement(Clock), this.target);
-        ReactDOM.render(React.createElement(Clock), this.target);
-        // attach dateEl to custom visual root el
-        this.target.appendChild(this.dateEl);
+        ReactDOM.render(React.createElement(App), this.target);
+        
+        // // attach dateEl to custom visual root el
+        // this.target.appendChild(this.dateEl);
         
         if (typeof document !== "undefined") {
         
         }
 
-        // set text node to date
-        // this.textNode = 
+        // set default timezone https://momentjs.com/timezone/docs/#/using-timezones/default-timezone/
+        // get user timzeone https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
         console.group('%c Testing moment.js', 'color: yellow');
-        console.log('moment -> ', moment().format());
-        console.log('testing time zone');
-        console.log(momentTimezone().tz('America/Los_Angeles').format());
-        // console.log(momentTimezone.tz.names());
-        console.groupEnd();
-        console.log('testing this settings');
+        // console.log('moment -> ', moment().format('LTS'));
+        // console.log('testing time zone');
+        // console.log(momentTimezone().tz('America/Los_Angeles').format('LTS'));
+        // console.log('moment local format', momentTimezone().format('L'));
         
-        setInterval(() => {
-            // settings should not be undefined
-            if (this.settings && this.settings.dateSettings) {
-                // pass date settings
-                this.updateDate(this.settings.dateSettings);
-            }
+        // console.log('moment timezone modification', momentTimezone().tz(momentTimezone.tz.guess()));
+        // console.log('momenttimezone', momentTimezone());
+        // console.log(momentTimezone().tz('America/Los_Angeles'));
+        // console.log(momentTimezone.tz.names());
+        // console.log('testing timezone existance', momentTimezone.tz.zone("Europe/Paris"));
+        // console.log('get user timezone', momentTimezone.tz.guess(true));
+        
+        console.groupEnd();
+        
+        // setInterval(() => {
+        //     // settings should not be undefined
+        //     if (this.settings && this.settings.dateSettings) {
+        //         // pass date settings
+        //         this.updateDate(this.settings.dateSettings);
+        //     }
             
-        }, 1000);
+        // }, 1000);
     }
 
     public update(options: VisualUpdateOptions) {
         /**
          * [ ] Visual landing page
          * [?] Add Date filering
+         * [ ] Display date given as a field when it is provided
          * [ ] Support bookmark
          * [ ] Support others features
+         * [ ] display measure value instead of default "no field value"
+         * [?] Change tick functionality
          * --- Capabilities ---
-         * [ ] Change language
+         * [?] Change language
          * [ ] Choose font
-         * [ ]
+         * [ ] Changing locale (displayed language)
+         * [X] Timezone
+         * [ ] Custom clock style (colors, size...)
+         * [ ] Custom date style (colors, size...)
+         * --- Format Panel ---
+         * [ ] Set default timezone to local timezone
          */
         this.settings = Visual.parseSettings(options && options.dataViews && options.dataViews[0]);
         if (options.dataViews && options.dataViews[0]) {
             const dataView: DataView = options.dataViews[0];
             console.group('%c Update','color: cyan');
             console.log(dataView);
+            console.log('settings', this.settings);
             console.groupEnd();
             this.viewport = options.viewport;
+
             const { width, height } = this.viewport;
             const size = Math.min(width, height);
 
-             Clock.update({
+             App.update({
                  size,
+                 settings: this.settings,
                  textLabel: dataView.metadata.columns[0].displayName,
                  textValue: dataView.single.value.toString()
              });
         } else {
             this.clear();
         }
-        console.group('%c Update called !', 'color: cyan');
-        console.log(this.settings);
-        console.groupEnd();
-        
-        console.log('custom visual has been udpated');
-        
+        // console.group('%c Update called !', 'color: cyan');
+        // console.log(this.settings);
+        // console.groupEnd();
     }
 
     private clear() {
-        Clock.update(initialState);
+        App.update(initialState);
     }
 
     private updateDate(dateSettings) {
         // update date
         this.date = moment();
+        // https://momentjs.com/docs/#/parsing/string-format/
         let formattedDate = this.date.format('LTS');
         let dateText = document.createTextNode(formattedDate);
         // clear date before attaching new one

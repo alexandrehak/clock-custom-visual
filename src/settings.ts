@@ -30,45 +30,43 @@ import { dataViewObjectsParser } from "powerbi-visuals-utils-dataviewutils";
 import DataViewObjectsParser = dataViewObjectsParser.DataViewObjectsParser;
 
 export class VisualSettings extends DataViewObjectsParser {
-  public dataPoint: dataPointSettings = new dataPointSettings();
   public clockSettings: clockSettings = new clockSettings();
-  public dateSettings: dateSettings = new dateSettings();
+  public dateTimeSettings: dateTimeSettings = new dateTimeSettings();
 }
 
-export class dateSettings {
-  public display: boolean = true;
-  // Default date format
-  public dateFormat: string = "DMY";
-  // Show all
-  public showAllDataPoints: string = "true";
+export class dateTimeSettings {
+  // https://momentjs.com/docs/#/i18n/instance-locale/
+  public locale: string = 'en';
+  public timezone: string = 'Local/Timezone';
+
   // https://en.wikipedia.org/wiki/Date_format_by_country 
-  public yearFormat: string = 'yyyy';
-  public monthFormat: string = 'mm';
-  public dayFormat: string = 'dd';
+  public dateFormat: string = "DMY";
+  public timeFormat: string = "8:30 PM";
+  public yearFormat: string = 'YYYY';
   public separator: string = '/';
   
-  public font: string = '';
-  public color: string = 'black';
-  public background: string = 'white';
+  public fontFamily: string = 'Default';
+  public fontSize: string = '20';
+  public color: string = '#17202A';
+  public alignment: string = 'Center';
+  public backgroundColor: string = '#D5E3E3';
+  public border: string = '';
+  public borderRadius: string = '';
+  public shadow: string = '';
+  public displayDate: boolean = true;
+  public displayTime: boolean = true;
 }
 
 export class clockSettings {
   public display: boolean = true;
   public predefinedModel: string = 'Classic';
+  public backgroundColor: string = 'white';
+  public shadow: string = '';
   public size: Number;
+  public hourHandSize: Number;
+  public minuteHandSize: Number;
+  public secondHandSize: Number;
+  public dotSize: Number;
+
   // Show all
 }
-
-export class dataPointSettings {
-  // Default color
-  public defaultColor: string = "";
-  // Show all
-  public showAllDataPoints: boolean = true;
-  // Fill
-  public fill: string = "";
-  // Color saturation
-  public fillRule: string = "";
-  // Text Size
-  public fontSize: number = 12;
-}
-

@@ -1,30 +1,15 @@
 import * as moment from "moment";
 import * as React from 'react';
 import '../../style/clock.css';
+import { VisualSettings } from "../settings";
 
-export interface State {
-  date?: moment.Moment,
-  textLabel: string,
-  textValue: string,
-  size: number
-}
+export interface State {};
+export interface Props {
+  date: moment.Moment,
+  settings: VisualSettings
+};
 
-export const initialState: State = {
-  // replace with moment.js object
-  date: moment(),
-  textLabel: "",
-  textValue: "",
-  size: 200
-}
-
-export class Clock extends React.Component<{}, State>{
-  constructor(props: any) {
-    super(props);
-    this.state = initialState;
-    console.log('initial state', this.state);
-    
-  }
-
+export class Clock extends React.Component<Props, State>{
   private static updateCallback: (data: object) => void = null;
 
   public static update(newState: State) {
@@ -33,25 +18,17 @@ export class Clock extends React.Component<{}, State>{
     }
   }
 
-  private tick() {
-    // mutate state date
-    this.state.date.add(1, 'second');
-    // update state date
-    this.setState(state => ({
-      date: state.date
-    }), this.setDate);
+  public componentDidUpdate() {
+    this.updateDate(this.props.date);
   }
 
-  public state: State = initialState;
-  public interval: number = null;
-
-  public setDate() {
+  public updateDate(date) {
     // select hand
     // $(".clock__" + hand).css("animation-delay", "" + left * -1 + "s");
     // hand.setAttribute('style', `animation-delay: ${left * -1 }s`) 
-    const hours = ((this.state.date.hours() + 11) % 12 + 1);
-    const minutes = this.state.date.minutes();
-    const seconds = this.state.date.seconds();
+    const hours = ((date.hours() + 11) % 12 + 1);
+    const minutes = date.minutes();
+    const seconds = date.seconds();
 
     const hoursDegrees = hours * 30;
     const minutesDegrees = minutes * 6;
@@ -66,27 +43,13 @@ export class Clock extends React.Component<{}, State>{
     // document.querySelector('.seconds').setAttribute('style', `tranform: rotate(${secondsDegrees}deg)`);
   }
 
-  public componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  public componentWillMount() {
-    // this.state.date.clone.add(1, 'second').format();
-    // update state
-    Clock.updateCallback = (newState: State): void => { this.setState(newState); };
-  }
-
-  public componentWillUnmount() {
-    Clock.updateCallback = null;
-    clearInterval(this.interval);  
-  }
-
   render() {
-    const { textLabel, textValue, size } = this.state;
-
-    const style: React.CSSProperties = { width: size, height: size };
+    const {backgroundColor} = this.props.settings.clockSettings;
     // console.log('-------- render date --------');
     // console.log(this.state);
+    const myStyle: React.CSSProperties = {
+      backgroundColor
+    }
     
     return (
       <div className="clock">

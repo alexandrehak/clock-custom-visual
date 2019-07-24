@@ -7,21 +7,39 @@
     }
   ],
   "objects": {
-    "dateSettings": {
+    "dateTimeSettings": {
       "displayName": "Date Settings",
       "properties": {
-        "showAllDataPoints": {
-          "displayName": "Show all",
+        "displayDate": {
+          "displayName": "Display Date",
+          "type": { "bool": true }
+        },
+        "displayTime": {
+          "displayName": "Display Time",
+          "type": { "bool": true }
+        },
+        "timezone": {
+          "displayName": "Timezone",
+          "description": "Select Local Timezone",
           "type": {
             "enumeration": [
               {
-                "displayName": "true",
-                "value": "true"
+                "displayName": "America/Los_Angeles",
+                "value": "America/Los_Angeles"
               },
-              {
-                "displayName": "false",
-                "value": "false"
-              }
+              { "displayName": "Europe/Paris", "value": "Europe/Paris" },
+              { "displayName": "Europe/London", "value": "Europe/London" },
+              { "displayName": "Asia/Tokyo", "value": "Asia/Tokyo" },
+              { "displayName": "Local/Timezone", "value": "Local/Timezone" }
+            ]
+          }
+        },
+        "locale": {
+          "displayName": "Locale",
+          "type": {
+            "enumeration": [
+              { "displayName": "fr", "value": "fr" },
+              { "displayName": "en", "value": "en" }
             ]
           }
         },
@@ -31,17 +49,245 @@
             "enumeration": [
               {
                 "displayName": "DMY",
-                "value": "DMY"
+                "value": "dmy"
               },
               {
                 "displayName": "MDY",
-                "value": "MDY"
+                "value": "mdy"
               },
               {
                 "displayName": "YMD",
-                "value": "YMD"
+                "value": "ymd"
+              },
+              {
+                "displayName": "09/04/1986 (Local format)",
+                "value": "L"
+              },
+              {
+                "displayName": "9/4/1986 (Local format)",
+                "value": "l"
+              },
+              {
+                "displayName": "September 4, 1986 (Local format)",
+                "value": "LL"
+              },
+              {
+                "displayName": "Sep 4, 1986 (Local format)",
+                "value": "ll"
               }
             ]
+          }
+        },
+        "timeFormat": {
+          "displayName": "Time format",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "8:30 PM",
+                "value": "LT"
+              },
+              {
+                "displayName": "8:30:25 PM",
+                "value": "LTS"
+              }
+            ]
+          }
+        },
+        "yearFormat": {
+          "displayName": "Year Format",
+          "description": "Choose a year format for all-numeric date format",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "Two-digit",
+                "value": "YY"
+              },
+              {
+                "displayName": "Four-digit",
+                "value": "YYYY"
+              }
+            ]
+          }
+        },
+        "separator": {
+          "displayName": "Separator",
+          "description": "Choose a separator for all-numeric date format",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "/",
+                "value": "/"
+              },
+              {
+                "displayName": ".",
+                "value": "."
+              },
+              {
+                "displayName": "-",
+                "value": "-"
+              },
+              {
+                "displayName": "Space",
+                "value": " "
+              }
+            ]
+          }
+        },
+        "fontFamily": {
+          "displayName": "Font family",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "Default",
+                "description": "helvetica, arial, sans-serif",
+                "value": "helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Arial",
+                "value": "Arial"
+              },
+              {
+                "displayName": "Arial Black",
+                "value": "\"Arial Black\""
+              },
+              {
+                "displayName": "Arial Unicode MS",
+                "value": "\"Arial Unicode MS\""
+              },
+              {
+                "displayName": "Calibri",
+                "value": "Calibri"
+              },
+              {
+                "displayName": "Cambria",
+                "value": "Cambria"
+              },
+              {
+                "displayName": "Cambria Math",
+                "value": "\"Cambria Math\""
+              },
+              {
+                "displayName": "Candara",
+                "value": "Candara"
+              },
+              {
+                "displayName": "Comic Sans MS",
+                "value": "\"Comic Sans MS\""
+              },
+              {
+                "displayName": "Consolas",
+                "value": "Consolas"
+              },
+              {
+                "displayName": "Constantia",
+                "value": "Constantia"
+              },
+              {
+                "displayName": "Corbel",
+                "value": "Corbel"
+              },
+              {
+                "displayName": "Courier New",
+                "value": "\"Courier New\""
+              },
+              {
+                "displayName": "Georgia",
+                "value": "Georgia"
+              },
+              {
+                "displayName": "Lucida Sans Unicode",
+                "value": "\"Lucida Sans Unicode\""
+              },
+              {
+                "displayName": "Segoe (Bold)",
+                "value": "\"Segoe UI Bold\", wf_segoe-ui_bold, helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Segoe UI",
+                "value": "\"Segoe UI\", wf_segoe-ui_normal, helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Segoe UI Light",
+                "value": "\"Segoe UI Light\", wf_segoe-ui_bold, helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Symbol",
+                "value": "Symbol"
+              },
+              {
+                "displayName": "Tahoma",
+                "value": "Tahoma"
+              },
+              {
+                "displayName": "Times New Roman",
+                "value": "\"Times New Roman\""
+              },
+              {
+                "displayName": "Trebuchet MS",
+                "value": "\"Trebuchet MS\""
+              },
+              {
+                "displayName": "Verdana",
+                "value": "Verdana"
+              },
+              {
+                "displayName": "Wingdings",
+                "value": "Wingdings"
+              }
+            ]
+          }
+        },
+        "alignment": {
+          "displayName": "Alignment",
+          "description": "Choose text alignment",
+          "type": {
+            "formatting": {
+              "alignment": true
+            }
+          }
+        },
+        "color": {
+          "displayName": "Color",
+          "description": "Choose a color for datetime",
+          "type": {
+            "fill": {
+              "solid": { "color": true }
+            }
+          }
+        },
+        "backgroundColor": {
+          "displayName": "Background color",
+          "type": {
+            "fill": {
+              "solid": { "color": true }
+            }
+          }
+        },
+        "border": {
+          "displayName": "Border",
+          "type": {
+            "text": true
+          }
+        },
+        "borderRadius": {
+          "displayName": "Border Radius",
+          "type": {
+            "text": true
+          }
+        },
+        "shadow": {
+          "displayName": "Shadow",
+          "type": {
+            "text": true
+          }
+        },
+        "fontSize": {
+          "displayName": "Font size",
+          "description": "Choose a font size in px",
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
           }
         }
       }
@@ -54,6 +300,14 @@
           "displayNameKey": "Clock_Display",
           "description": "Toggle clock visibility",
           "type": { "bool": true }
+        },
+        "backgroundColor": {
+          "displayName": "Background Color",
+          "type": {
+            "fill": {
+              "solid": { "color": true }
+            }
+          }
         }
       }
     },
