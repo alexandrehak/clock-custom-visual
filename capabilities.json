@@ -7,6 +7,35 @@
     }
   ],
   "objects": {
+    "customVisualSettings": {
+      "displayName": "Custom Visual Settings",
+      "properties": {
+        "layout": {
+          "displayName": "Layout",
+          "description": "Choose how to distributes space between Clock and DateTime",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "normal",
+                "value": "normal"
+              },
+              {
+                "displayName": "space-around",
+                "value": "space-around"
+              },
+              {
+                "displayName": "space-between",
+                "value": "space-between"
+              },
+              {
+                "displayName": "space-evenly",
+                "value": "space-evenly"
+              }
+            ]
+          }
+        }
+      }
+    },
     "dateTimeSettings": {
       "displayName": "Date Settings",
       "properties": {
@@ -17,6 +46,17 @@
         "displayTime": {
           "displayName": "Display Time",
           "type": { "bool": true }
+        },
+        "dateTimeLayout": {
+          "displayName": "Date and Time Layout",
+          "type": {
+            "enumeration": [
+              {"displayName": "Vertical Time and Date", "value": "column"},
+              {"displayName": "Vertical Date and Time", "value": "column-reverse"},
+              {"displayName": "Horizontal Time and Date", "value": "row"},
+              {"displayName": "Horizontal Date and Time", "value": "row-reverse"}
+            ]
+          }
         },
         "timezone": {
           "displayName": "Timezone",
@@ -48,31 +88,19 @@
           "type": {
             "enumeration": [
               {
-                "displayName": "DMY",
-                "value": "dmy"
-              },
-              {
-                "displayName": "MDY",
-                "value": "mdy"
-              },
-              {
-                "displayName": "YMD",
-                "value": "ymd"
-              },
-              {
-                "displayName": "09/04/1986 (Local format)",
+                "displayName": "09/04/1986",
                 "value": "L"
               },
               {
-                "displayName": "9/4/1986 (Local format)",
+                "displayName": "9/4/1986",
                 "value": "l"
               },
               {
-                "displayName": "September 4, 1986 (Local format)",
+                "displayName": "September 4, 1986",
                 "value": "LL"
               },
               {
-                "displayName": "Sep 4, 1986 (Local format)",
+                "displayName": "Sep 4, 1986",
                 "value": "ll"
               }
             ]
@@ -93,44 +121,16 @@
             ]
           }
         },
-        "yearFormat": {
-          "displayName": "Year Format",
-          "description": "Choose a year format for all-numeric date format",
+        "width": {
+          "displayName": "Width",
           "type": {
-            "enumeration": [
-              {
-                "displayName": "Two-digit",
-                "value": "YY"
-              },
-              {
-                "displayName": "Four-digit",
-                "value": "YYYY"
-              }
-            ]
+            "numeric": true
           }
         },
-        "separator": {
-          "displayName": "Separator",
-          "description": "Choose a separator for all-numeric date format",
+        "height": {
+          "displayName": "Height",
           "type": {
-            "enumeration": [
-              {
-                "displayName": "/",
-                "value": "/"
-              },
-              {
-                "displayName": ".",
-                "value": "."
-              },
-              {
-                "displayName": "-",
-                "value": "-"
-              },
-              {
-                "displayName": "Space",
-                "value": " "
-              }
-            ]
+            "numeric": true
           }
         },
         "fontFamily": {
@@ -237,15 +237,6 @@
             ]
           }
         },
-        "alignment": {
-          "displayName": "Alignment",
-          "description": "Choose text alignment",
-          "type": {
-            "formatting": {
-              "alignment": true
-            }
-          }
-        },
         "color": {
           "displayName": "Color",
           "description": "Choose a color for datetime",
@@ -281,8 +272,17 @@
             "text": true
           }
         },
-        "fontSize": {
-          "displayName": "Font size",
+        "timeSize": {
+          "displayName": "Time Font Size",
+          "description": "Choose a font size in px",
+          "type": {
+            "formatting": {
+              "fontSize": true
+            }
+          }
+        },
+        "dateSize": {
+          "displayName": "Date Font Size",
           "description": "Choose a font size in px",
           "type": {
             "formatting": {
@@ -306,6 +306,43 @@
           "type": {
             "fill": {
               "solid": { "color": true }
+            }
+          }
+        },
+        "size": {
+          "displayName": "Size",
+          "description": "Minimum is 200",
+          "type": {
+            "numeric": true
+          }
+        },
+        "hourColor": {
+          "displayName": "Hour Hand Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "minuteColor": {
+          "displayName": "Minute Hand Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "secondColor": {
+          "displayName": "Second Hand Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
             }
           }
         }

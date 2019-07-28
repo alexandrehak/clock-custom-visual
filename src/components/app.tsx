@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as moment from "moment-timezone";
+import * as moment from 'moment-timezone';
 
 // React Components
 import Date from './date';
@@ -9,21 +9,15 @@ import { VisualSettings } from '../settings';
 export interface Props {}
 
 export interface State {
-  date?: moment,
-  settings: VisualSettings,
-  textLabel: String,
-  textValue: String,
-  size: Number
+  date?: moment;
+  settings: VisualSettings;
 }
 
 export const initialState: State = {
   // set default timezone to local timezone
   date: moment().tz(moment.tz.guess()),
-  settings: new VisualSettings(),
-  textLabel: "",
-  textValue: "",
-  size: 200
-}
+  settings: new VisualSettings()
+};
 
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -32,7 +26,7 @@ class App extends React.Component<Props, State> {
   }
 
   private setDate() {
-    const hours = ((this.state.date.hours() + 11) % 12 + 1);
+    const hours = ((this.state.date.hours() + 11) % 12) + 1;
     const minutes = this.state.date.minutes();
     const seconds = this.state.date.seconds();
 
@@ -40,21 +34,27 @@ class App extends React.Component<Props, State> {
     const minutesDegrees = minutes * 6;
     const secondsDegrees = seconds * 6;
 
-    document.getElementById('hour').style.transform = `rotate(${hoursDegrees}deg)`;
-    document.getElementById('minute').style.transform = `rotate(${minutesDegrees}deg)`;
-    document.getElementById('second').style.transform = `rotate(${secondsDegrees}deg)`;
+    document.getElementById(
+      'hour'
+    ).style.transform = `rotate(${hoursDegrees}deg)`;
+    document.getElementById(
+      'minute'
+    ).style.transform = `rotate(${minutesDegrees}deg)`;
+    document.getElementById(
+      'second'
+    ).style.transform = `rotate(${secondsDegrees}deg)`;
   }
 
   private static updateCallback: (data: object) => void = null;
 
   public static update(newState: State) {
-    if(typeof App.updateCallback === 'function'){
+    if (typeof App.updateCallback === 'function') {
       App.updateCallback(newState);
     }
   }
 
   public updateSettings(settings): void {
-    let {timezone, locale} = settings.dateTimeSettings;
+    let { timezone, locale } = settings.dateTimeSettings;
     // check if settings has change
     // console.log('inside update settings', settings);
     // this.state.date.tz('America/Los_Angeles');
@@ -63,11 +63,6 @@ class App extends React.Component<Props, State> {
     this.updateLocale(locale);
     // timezone
     this.updateTimezone(timezone);
-    // if (settings.date._z) {
-
-    // }
-    // apply new settings
-    
   }
 
   private updateTimezone(timezone): void {
@@ -81,22 +76,20 @@ class App extends React.Component<Props, State> {
       if (moment.tz.zone(timezone)) {
         // mutate react state
         this.state.date.tz(timezone);
-        
-        this.setState((prevState) => {
-          date: prevState.date
+
+        this.setState(prevState => {
+          date: prevState.date;
         });
       } else if (timezone === 'Local/Timezone' && timezone !== localTimezone) {
         // mutate react state
         this.state.date.tz(localTimezone);
-        
-        this.setState((prevState) => {
-          date: prevState.date
+
+        this.setState(prevState => {
+          date: prevState.date;
         });
-        
       } else {
-        console.error(`${timezone} doesn't exit.`)
+        console.error(`${timezone} doesn't exit.`);
       }
-      
     }
   }
 
@@ -104,9 +97,9 @@ class App extends React.Component<Props, State> {
     // update if necessary
     if (this.state.date.locale() !== locale) {
       let date = this.state.date.locale(locale);
-      
+
       this.setState(() => {
-        date
+        date;
       });
     }
   }
@@ -116,10 +109,10 @@ class App extends React.Component<Props, State> {
   public interval: number = null;
 
   public componentWillMount() {
-    App.updateCallback = (newState: State): void => { 
+    App.updateCallback = (newState: State): void => {
       this.setState(newState, () => {
         // wait for state to be update
-        this.updateSettings(this.state.settings)
+        this.updateSettings(this.state.settings);
       });
     };
   }
@@ -130,7 +123,7 @@ class App extends React.Component<Props, State> {
 
   public componentWillUnmount() {
     App.updateCallback = null;
-    clearInterval(this.interval);  
+    clearInterval(this.interval);
   }
 
   private tick() {
@@ -142,20 +135,21 @@ class App extends React.Component<Props, State> {
     }));
   }
 
-
   // public componentWillUnmount() {
   //   App.updateCallback = null;
-  //   clearInterval(this.interval);  
+  //   clearInterval(this.interval);
   // }
 
   render() {
-    // const { textLabel, textValue, size, date } = this.state;
+    const { layout } = this.state.settings.customVisualSettings;
 
-    // const style: React.CSSProperties = { width: size.toString(), height: size };
+    const style: React.CSSProperties = {
+      justifyContent: layout
+    };
 
     return (
-      <div id="date-app-container">
-        <Clock date={this.state.date} settings={this.state.settings}/>
+      <div id="date-app-container" style={style}>
+        <Clock date={this.state.date} settings={this.state.settings} />
         <Date date={this.state.date} settings={this.state.settings} />
       </div>
     );

@@ -30,8 +30,13 @@ import { dataViewObjectsParser } from "powerbi-visuals-utils-dataviewutils";
 import DataViewObjectsParser = dataViewObjectsParser.DataViewObjectsParser;
 
 export class VisualSettings extends DataViewObjectsParser {
+  public customVisualSettings: customVisualSettings = new customVisualSettings();
   public clockSettings: clockSettings = new clockSettings();
   public dateTimeSettings: dateTimeSettings = new dateTimeSettings();
+}
+
+export class customVisualSettings {
+  public layout: string = 'space-evenly';
 }
 
 export class dateTimeSettings {
@@ -40,33 +45,39 @@ export class dateTimeSettings {
   public timezone: string = 'Local/Timezone';
 
   // https://en.wikipedia.org/wiki/Date_format_by_country 
-  public dateFormat: string = "DMY";
   public timeFormat: string = "8:30 PM";
-  public yearFormat: string = 'YYYY';
-  public separator: string = '/';
-  
+  public dateFormat: string = "September 4, 1986";
+  // Fonts
   public fontFamily: string = 'Default';
-  public fontSize: string = '20';
-  public color: string = '#17202A';
-  public alignment: string = 'Center';
-  public backgroundColor: string = '#D5E3E3';
-  public border: string = '';
-  public borderRadius: string = '';
-  public shadow: string = '';
+  public dateSize: string = '20';
+  public timeSize: string = '35';
+  // public alignment: string = 'Center';
+  public color: string = '#fff';
+  public backgroundColor: string = '#222';
+  public dateTimeLayout: string = 'Vertical Time and Date';
+  // Sizing and borders
+  public width: number = 225;
+  public height: number = 145;
+  public border: string = '4px solid cyan';
+  public borderRadius: string = '15px';
+  // Display
+  public display: boolean = true;
   public displayDate: boolean = true;
   public displayTime: boolean = true;
+  public displayInformation: boolean = false;
 }
 
 export class clockSettings {
   public display: boolean = true;
   public predefinedModel: string = 'Classic';
-  public backgroundColor: string = 'white';
-  public shadow: string = '';
-  public size: Number;
-  public hourHandSize: Number;
-  public minuteHandSize: Number;
-  public secondHandSize: Number;
-  public dotSize: Number;
+  public backgroundColor: string = '#c8c8c8';
+
+  public size: number = 300;
+
+  public hourColor: string = '#000';
+  public minuteColor: string = '#000';
+  public secondColor: string = '#000';
+  
 
   // Show all
 }
