@@ -5,7 +5,6 @@ import * as moment from 'moment-timezone';
 import Date from './date';
 import Clock from './clock';
 import { VisualSettings } from '../settings';
-import { number, string } from 'prop-types';
 
 export interface Props {}
 
