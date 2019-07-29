@@ -57,28 +57,23 @@ export class Visual implements IVisual {
   private dateEl: HTMLElement;
 
   constructor(options: VisualConstructorOptions) {
-    console.log('Visual constructor', options);
     this.target = options.element;
-
-    // delete this later
-    // set date
-    // this.date = moment();
-    // create date element
-    // this.dateEl = document.createElement('p');
-
-    // ReactDOM.render(React.createElement(Clock), this.target);
-    this.target.appendChild(this.createMap());
-    // ReactDOM.render(React.createElement(App), this.target);
+    
+    // testing 
+    // this.target.appendChild(this.createMap());
+    if (typeof document !== 'undefined') {
+        ReactDOM.render(React.createElement(App), this.target);
+    }  else {
+      console.error('document is undefined');
+    }
 
     // // attach dateEl to custom visual root el
     // this.target.appendChild(this.dateEl);
 
-    if (typeof document !== 'undefined') {
-    }
 
     // set default timezone https://momentjs.com/timezone/docs/#/using-timezones/default-timezone/
     // get user timzeone https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
-    console.group('%c Testing moment.js', 'color: yellow');
+    // console.group('%c Testing moment.js', 'color: yellow');
     // console.log('moment -> ', moment().format('LTS'));
     // console.log('testing time zone');
     // console.log(momentTimezone().tz('America/Los_Angeles').format('LTS'));
@@ -91,49 +86,41 @@ export class Visual implements IVisual {
     // console.log('testing timezone existance', momentTimezone.tz.zone("Europe/Paris"));
     // console.log('get user timezone', momentTimezone.tz.guess(true));
 
-    console.groupEnd();
-
-    // setInterval(() => {
-    //     // settings should not be undefined
-    //     if (this.settings && this.settings.dateSettings) {
-    //         // pass date settings
-    //         this.updateDate(this.settings.dateSettings);
-    //     }
-
-    // }, 1000);
+    // console.groupEnd();
   }
 
-  public createMap() {
-    let iframe = document.createElement('iframe');
-    iframe.width = '600';
-    iframe.height = '400';
-    iframe.frameBorder = '0';
-    iframe.scrolling = 'no';
-    iframe.marginHeight = '0';
-    iframe.marginWidth = '0';
+  // public createMap() {
+  //   let iframe = document.createElement('iframe');
+  //   iframe.width = '600';
+  //   iframe.height = '400';
+  //   iframe.frameBorder = '0';
+  //   iframe.scrolling = 'no';
+  //   iframe.marginHeight = '0';
+  //   iframe.marginWidth = '0';
     
-    iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
-    iframe.setAttribute('crossorigin', 'anonymous');
-    iframe.src = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
-    iframe.allowFullscreen = true;
-    return iframe;
-  }
+  //   iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
+  //   iframe.setAttribute('crossorigin', 'anonymous');
+  //   iframe.src = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
+  //   iframe.allowFullscreen = true;
+  //   return iframe;
+  // }
 
   public update(options: VisualUpdateOptions) {
     /**
      * [ ] Visual landing page
      * [?] Add Date filering
-     * [ ] Display date given as a field when it is provided
+     * [X] Display date given as a field when it is provided
      * [ ] Support bookmark
-     * [ ] Support others features
-     * [ ] display measure value instead of default "no field value"
-     * [?] Change tick functionality
+     * [?] Support others pbi features
+     * [X] display measure value instead of default "no field value"
+     * [?] Change tick functionality / new instance of moment.js each second ?
+     * [?] Support more language, date format...
      * --- Capabilities ---
-     * [?] Change language
+     * [X] Change language
      * [X] Choose font
      * [X] Changing locale (displayed language)
      * [X] Timezone
-     * [ ] Display timezone information
+     * [?] Display timezone information
      * [X] Custom clock style (colors, size...)
      * [X] Custom date style (colors, size...)
      */
@@ -143,11 +130,20 @@ export class Visual implements IVisual {
       );
       const dataView: DataView = options.dataViews[0];
       const dateValue: powerbi.PrimitiveValue = dataView.single.value;
-      console.group('%c Update', 'color: cyan');
+      // console.group('%c Update', 'color: cyan');
+      // console.log(this.settings);
+      // const {dateFormat, timeFormat} = this.settings.dateTimeSettings;
+      // console.log('dateFormat', dateFormat.toUpperCase());
+      // console.log('And I want this', ' LL');
+      // console.log('-----------------------------------');
+      // console.log('timeFormat', timeFormat.toUpperCase());
+      // console.log('And I want this', ' LTS');
+      
+      
       // console.log(dataView.single.value);
       // let test = moment(dataView.single.value.toString(), moment.tz.guess());
       // this.viewport = options.viewport;
-      console.groupEnd();
+      // console.groupEnd();
 
       let updateDateObj = {};
       let momentDate = moment(dateValue.toString());
@@ -180,7 +176,7 @@ export class Visual implements IVisual {
   }
 
   private handleLandingPage() {
-
+    
   }
 
   private static parseSettings(dataView: DataView): VisualSettings {

@@ -19,7 +19,7 @@ class Date extends React.Component<Props, State> {
   private formatDate(date) {
     let formattedString;
     let { dateFormat } = this.props.settings.dateTimeSettings;
-
+    
     // [ ] update only if format has been changed
     // check if is date
     // if (dateFormat.length === 3) {
@@ -55,7 +55,7 @@ class Date extends React.Component<Props, State> {
 
     // } else {
     // Local Format was chosen
-    formattedString = dateFormat;
+    // formattedString = dateFormat;
     // }
 
     // let format = `${separator}`;
@@ -63,12 +63,13 @@ class Date extends React.Component<Props, State> {
 
     // }
     // console.log(formattedString);
-
-    return date.format(formattedString);
+    
+    
+    return date.format(dateFormat);
   }
 
   private formatTime(date) {
-    let timeFormat = this.props.settings.dateTimeSettings.timeFormat;
+    const timeFormat = this.props.settings.dateTimeSettings.timeFormat;
     // console.log('%c time formattting', 'color: cyan');
     // console.log(date.format(timeFormat));
 
@@ -76,8 +77,8 @@ class Date extends React.Component<Props, State> {
   }
 
   render() {
-    let dateTime = [];
-    let {
+    const dateTime = [];
+    const {
       backgroundColor,
       width,
       height,

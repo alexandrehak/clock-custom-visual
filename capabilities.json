@@ -84,7 +84,7 @@
           }
         },
         "dateFormat": {
-          "displayName": "Date format",
+          "displayName": "Date Format",
           "type": {
             "enumeration": [
               {

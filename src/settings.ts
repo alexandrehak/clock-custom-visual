@@ -41,20 +41,20 @@ export class customVisualSettings {
 
 export class dateTimeSettings {
   // https://momentjs.com/docs/#/i18n/instance-locale/
-  public locale: string = 'en';
+  public locale: string = 'fr';
   public timezone: string = 'Local/Timezone';
 
   // https://en.wikipedia.org/wiki/Date_format_by_country 
-  public timeFormat: string = "8:30 PM";
-  public dateFormat: string = "September 4, 1986";
+  public timeFormat: string = "LTS";
+  public dateFormat: string = "LL";
   // Fonts
-  public fontFamily: string = 'Default';
+  public fontFamily: string = "Arial";
   public dateSize: string = '20';
   public timeSize: string = '35';
   // public alignment: string = 'Center';
   public color: string = '#fff';
   public backgroundColor: string = '#222';
-  public dateTimeLayout: string = 'Vertical Time and Date';
+  public dateTimeLayout: string = 'column';
   // Sizing and borders
   public width: number = 225;
   public height: number = 145;
@@ -69,6 +69,7 @@ export class dateTimeSettings {
 
 export class clockSettings {
   public display: boolean = true;
+  // [?] choose clock model
   public predefinedModel: string = 'Classic';
   public backgroundColor: string = '#c8c8c8';
 

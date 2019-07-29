@@ -5,6 +5,7 @@ import * as moment from 'moment-timezone';
 import Date from './date';
 import Clock from './clock';
 import { VisualSettings } from '../settings';
+import { number, string } from 'prop-types';
 
 export interface Props {}
 
@@ -15,9 +16,12 @@ export interface State {
 
 export const initialState: State = {
   // set default timezone to local timezone
-  date: moment().tz(moment.tz.guess()),
+  date: null,
   settings: new VisualSettings()
 };
+
+// old initialState date value
+// moment().tz(moment.tz.guess())
 
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -50,11 +54,15 @@ class App extends React.Component<Props, State> {
   public static update(newState: State) {
     if (typeof App.updateCallback === 'function') {
       App.updateCallback(newState);
-    }
+    } 
   }
 
   public updateSettings(settings): void {
-    let { timezone, locale } = settings.dateTimeSettings;
+    let { dateFormat, timeFormat, timezone, locale } = settings.dateTimeSettings;
+    // console.group('%c date updateFormating', 'color: greenyellow');
+    // console.log('dateFormat', dateFormat);
+    // console.log('timeFormat', timeFormat);
+    // console.groupEnd();
     // check if settings has change
     // console.log('inside update settings', settings);
     // this.state.date.tz('America/Los_Angeles');
@@ -118,6 +126,7 @@ class App extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
+    // [ ] update if there is a date field
     this.interval = setInterval(() => this.tick(), 1000);
   }
 
@@ -127,12 +136,15 @@ class App extends React.Component<Props, State> {
   }
 
   private tick() {
-    // mutate state date
-    this.state.date.add(1, 'second');
-    // update state date
-    this.setState(state => ({
-      date: state.date
-    }));
+    // prevent ticking if date isn't set
+    if (this.state.date) {
+      // mutate state date
+      this.state.date.add(1, 'second');
+      // update state date
+      this.setState(state => ({
+        date: state.date
+      }));
+    }
   }
 
   // public componentWillUnmount() {
@@ -146,6 +158,11 @@ class App extends React.Component<Props, State> {
     const style: React.CSSProperties = {
       justifyContent: layout
     };
+
+    // don't display datetime when no field
+    if (this.state.date === null) {
+      return null
+    }
 
     return (
       <div id="date-app-container" style={style}>
