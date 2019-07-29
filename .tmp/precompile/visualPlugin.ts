@@ -2,8 +2,8 @@ import { Visual } from "../../src/visual";
 var powerbiKey = "powerbi";
 var powerbi = window[powerbiKey];
 
-var testE4B8174EFC844BBBADC0DEBD2BBDE4F2_DEBUG = {
-    name: 'testE4B8174EFC844BBBADC0DEBD2BBDE4F2_DEBUG',
+var testE4B8174EFC844BBBADC0DEBD2BBDE4F2 = {
+    name: 'testE4B8174EFC844BBBADC0DEBD2BBDE4F2',
     displayName: 'test',
     class: 'Visual',
     version: '1.0.0',
@@ -21,7 +21,7 @@ var testE4B8174EFC844BBBADC0DEBD2BBDE4F2_DEBUG = {
 if (typeof powerbi !== "undefined") {
     powerbi.visuals = powerbi.visuals || {};
     powerbi.visuals.plugins = powerbi.visuals.plugins || {};
-    powerbi.visuals.plugins["testE4B8174EFC844BBBADC0DEBD2BBDE4F2_DEBUG"] = testE4B8174EFC844BBBADC0DEBD2BBDE4F2_DEBUG;
+    powerbi.visuals.plugins["testE4B8174EFC844BBBADC0DEBD2BBDE4F2"] = testE4B8174EFC844BBBADC0DEBD2BBDE4F2;
 }
 
-export default testE4B8174EFC844BBBADC0DEBD2BBDE4F2_DEBUG;
+export default testE4B8174EFC844BBBADC0DEBD2BBDE4F2;
