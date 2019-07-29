@@ -59,6 +59,7 @@ export class Visual implements IVisual {
   constructor(options: VisualConstructorOptions) {
     this.target = options.element;
     
+    
     // testing 
     // this.target.appendChild(this.createMap());
     if (typeof document !== 'undefined') {
@@ -107,6 +108,7 @@ export class Visual implements IVisual {
 
   public update(options: VisualUpdateOptions) {
     /**
+     * [ ] Rename visual
      * [ ] Visual landing page
      * [?] Add Date filering
      * [X] Display date given as a field when it is provided
@@ -146,12 +148,16 @@ export class Visual implements IVisual {
       // console.groupEnd();
 
       let updateDateObj = {};
-      let momentDate = moment(dateValue.toString());
-      // check date validity
+      const dateValueString = dateValue.toString();
       
-      if (dateValue !== this.cachedDate) {
+      // check date validity
+      if (dateValueString !== this.cachedDate) {
+        this.cachedDate = dateValueString;
+        // convert utc to locale
+        const date = new Date(dateValueString);
+        const momentDate = moment(new Date(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()))));
+        
         if (momentDate.isValid()) {
-          this.cachedDate = dateValue;
           updateDateObj['date'] = momentDate;
         } else {
           console.error(`Date field provided isn't valid: ${dateValue}`);
