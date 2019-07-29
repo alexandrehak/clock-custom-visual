@@ -153,9 +153,14 @@ export class Visual implements IVisual {
       // check date validity
       if (dateValueString !== this.cachedDate) {
         this.cachedDate = dateValueString;
-        // convert utc to locale
         const date = new Date(dateValueString);
-        const momentDate = moment(new Date(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()))));
+        // convert utc to locale
+        const momentDate = moment(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+        // const momentDate1 = moment(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+        // const momentDate2 = moment.utc(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
+        // console.log('momentDate', momentDate);
+        // console.log('momentDate1', momentDate1);
+        // console.log('momentDate2', momentDate2);
         
         if (momentDate.isValid()) {
           updateDateObj['date'] = momentDate;
