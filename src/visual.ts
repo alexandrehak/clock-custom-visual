@@ -58,19 +58,17 @@ export class Visual implements IVisual {
 
   constructor(options: VisualConstructorOptions) {
     this.target = options.element;
-    
-    
-    // testing 
+
+    // testing
     // this.target.appendChild(this.createMap());
     if (typeof document !== 'undefined') {
-        ReactDOM.render(React.createElement(App), this.target);
-    }  else {
+      ReactDOM.render(React.createElement(App), this.target);
+    } else {
       console.error('document is undefined');
     }
 
     // // attach dateEl to custom visual root el
     // this.target.appendChild(this.dateEl);
-
 
     // set default timezone https://momentjs.com/timezone/docs/#/using-timezones/default-timezone/
     // get user timzeone https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
@@ -98,7 +96,7 @@ export class Visual implements IVisual {
   //   iframe.scrolling = 'no';
   //   iframe.marginHeight = '0';
   //   iframe.marginWidth = '0';
-    
+
   //   iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
   //   iframe.setAttribute('crossorigin', 'anonymous');
   //   iframe.src = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
@@ -107,16 +105,19 @@ export class Visual implements IVisual {
   // }
 
   public update(options: VisualUpdateOptions) {
+    console.log('update');
+
     /**
-     * [ ] Rename visual
+     * [ ] Rename visual (pbiviz.json)
      * [ ] Visual landing page
      * [?] Add Date filering
      * [X] Display date given as a field when it is provided
-     * [ ] Support bookmark
+     * [?] Support bookmark
      * [?] Support others pbi features
      * [X] display measure value instead of default "no field value"
      * [?] Change tick functionality / new instance of moment.js each second ?
      * [?] Support more language, date format...
+     * [ ] Remove unused folder (git remove)
      * --- Capabilities ---
      * [X] Change language
      * [X] Choose font
@@ -140,28 +141,27 @@ export class Visual implements IVisual {
       // console.log('-----------------------------------');
       // console.log('timeFormat', timeFormat.toUpperCase());
       // console.log('And I want this', ' LTS');
-      
-      
-      // console.log(dataView.single.value);
-      // let test = moment(dataView.single.value.toString(), moment.tz.guess());
-      // this.viewport = options.viewport;
-      // console.groupEnd();
 
       let updateDateObj = {};
       const dateValueString = dateValue.toString();
-      
+
       // check date validity
       if (dateValueString !== this.cachedDate) {
         this.cachedDate = dateValueString;
         const date = new Date(dateValueString);
-        // convert utc to locale
-        const momentDate = moment(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
-        // const momentDate1 = moment(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
-        // const momentDate2 = moment.utc(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()));
-        // console.log('momentDate', momentDate);
-        // console.log('momentDate1', momentDate1);
-        // console.log('momentDate2', momentDate2);
-        
+        // convert utc to locale for powerbi service
+        const momentDate = moment(
+          Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds(),
+            date.getMilliseconds()
+          )
+        );
+
         if (momentDate.isValid()) {
           updateDateObj['date'] = momentDate;
         } else {
@@ -177,17 +177,10 @@ export class Visual implements IVisual {
     } else {
       this.clear();
     }
-    // console.group('%c Update called !', 'color: cyan');
-    // console.log(this.settings);
-    // console.groupEnd();
   }
 
   private clear() {
     App.update(initialState);
-  }
-
-  private handleLandingPage() {
-    
   }
 
   private static parseSettings(dataView: DataView): VisualSettings {

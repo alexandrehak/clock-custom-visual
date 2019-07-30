@@ -1,0 +1,16 @@
+#landing-page {
+    text-align: center;
+    padding: 0 13%;
+}
+
+#landing-page__title {
+    margin: 50px 0;
+}
+
+#landing-page__main__how-it-works__p {
+    background-color: #333;
+    color: white;
+
+    padding: 5px;
+    margin: auto;
+}

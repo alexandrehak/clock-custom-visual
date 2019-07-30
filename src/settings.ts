@@ -61,7 +61,6 @@ export class dateTimeSettings {
   public border: string = '4px solid cyan';
   public borderRadius: string = '15px';
   // Display
-  public display: boolean = true;
   public displayDate: boolean = true;
   public displayTime: boolean = true;
   public displayInformation: boolean = false;

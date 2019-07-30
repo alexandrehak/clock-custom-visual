@@ -7,7 +7,7 @@
     "version": "1.0.0",
     "description": "Clock and datetime",
     "supportUrl": "none",
-    "gitHubUrl": ""
+    "gitHubUrl": "https://github.com/alexandrehak/clock-custom-visual"
   },
   "apiVersion": "2.6.0",
   "author": { "name": "Alexandre Hak", "email": "ahak@expertime.com" },

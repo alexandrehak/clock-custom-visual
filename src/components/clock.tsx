@@ -92,9 +92,8 @@ export class Clock extends React.Component<Props, State> {
     };
 
     // check if should render
-    if (!display) {
-      return [];
-    }
+    if (!display) return false;
+    
 
     return (
       <div id="clock-container" style={containerStyle}>

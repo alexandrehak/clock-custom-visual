@@ -93,6 +93,9 @@ class Date extends React.Component<Props, State> {
       dateSize
     } = this.props.settings.dateTimeSettings;
 
+    // check if must display datetime block
+    if (!displayTime && !displayDate) return false;
+
     const dateTimeStyle: React.CSSProperties = {
       width,
       height,

@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment-timezone';
 
 // React Components
+import LandingPage from './landing-page';
 import Date from './date';
 import Clock from './clock';
 import { VisualSettings } from '../settings';
@@ -160,7 +161,7 @@ class App extends React.Component<Props, State> {
 
     // don't display datetime when no field
     if (this.state.date === null) {
-      return null
+      return <LandingPage />;
     }
 
     return (
