@@ -63,4 +63,4 @@ typings/
 # powerbi
 dist/
 .tmp/
-./webpack.statistics*.html
+webpack.statistics.*.html
