@@ -58,17 +58,26 @@ export class Visual implements IVisual {
 
   constructor(options: VisualConstructorOptions) {
     this.target = options.element;
+    // console.group('%c Testing window','color: cyan');
+    // console.log('HAHAHAH', test);
+    // console.log(window);
+    // console.log(visualIframe);
+    // console.log('%c HELLLO WORLD', 'font-size: 40px');
+    
+    // console.groupEnd();
 
+    // try editing sandbox rules
+    
     // testing
     // this.target.appendChild(this.createMap());
     if (typeof document !== 'undefined') {
+      // this.target.appendChild(this.createMap());
       ReactDOM.render(React.createElement(App), this.target);
     } else {
       console.error('document is undefined');
     }
 
     // // attach dateEl to custom visual root el
-    // this.target.appendChild(this.dateEl);
 
     // set default timezone https://momentjs.com/timezone/docs/#/using-timezones/default-timezone/
     // get user timzeone https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
@@ -88,25 +97,30 @@ export class Visual implements IVisual {
     // console.groupEnd();
   }
 
-  // public createMap() {
-  //   let iframe = document.createElement('iframe');
-  //   iframe.width = '600';
-  //   iframe.height = '400';
-  //   iframe.frameBorder = '0';
-  //   iframe.scrolling = 'no';
-  //   iframe.marginHeight = '0';
-  //   iframe.marginWidth = '0';
-
-  //   iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
-  //   iframe.setAttribute('crossorigin', 'anonymous');
-  //   iframe.src = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
-  //   iframe.allowFullscreen = true;
-  //   return iframe;
-  // }
+  public createMap() {
+    let googleMapUrl = 'https://maps.google.com/maps?f=q&source=s_q&q=buenos+aires&sll=37.0625,-95.677068&sspn=38.638819,80.859375&t=h&hnear=Buenos+Aires,+Argentina&z=11&ll=-34.603723,-58.381593&output=embed';
+    // let cheatUrl = 'https://wesbos-playground--alexandrehak.repl.co';
+    let mapUrl = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
+    // let mapUrl2 = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
+    // let mapUrl3 = "https://www.geoportail.gouv.fr/carte?c=2.630778396286878,47.60731445770401&z=7&l0=OPEN_STREET_MAP::GEOPORTAIL:OGC:WMTS(0.85)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes";
+    let iframe = document.createElement('iframe');
+    iframe.width = '600';
+    iframe.height = '400';
+    iframe.frameBorder = '0';
+    iframe.scrolling = 'no';
+    iframe.marginHeight = '0';
+    iframe.marginWidth = '0';
+    // testing
+    iframe.sandbox.toggle('allow-scripts');
+    iframe.sandbox.toggle('allow-same-origin');
+    // iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
+    // iframe.setAttribute('crossorigin', 'anonymous');
+    iframe.src = mapUrl;
+    iframe.allowFullscreen = true;
+    return iframe;
+  }
 
   public update(options: VisualUpdateOptions) {
-    console.log('update');
-
     /**
      * [ ] Rename visual (pbiviz.json)
      * [ ] Visual landing page
