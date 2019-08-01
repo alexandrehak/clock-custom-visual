@@ -58,18 +58,7 @@ export class Visual implements IVisual {
 
   constructor(options: VisualConstructorOptions) {
     this.target = options.element;
-    // console.group('%c Testing window','color: cyan');
-    // console.log('HAHAHAH', test);
-    // console.log(window);
-    // console.log(visualIframe);
-    // console.log('%c HELLLO WORLD', 'font-size: 40px');
-    
-    // console.groupEnd();
 
-    // try editing sandbox rules
-    
-    // testing
-    // this.target.appendChild(this.createMap());
     if (typeof document !== 'undefined') {
       // this.target.appendChild(this.createMap());
       ReactDOM.render(React.createElement(App), this.target);
@@ -97,33 +86,11 @@ export class Visual implements IVisual {
     // console.groupEnd();
   }
 
-  public createMap() {
-    let googleMapUrl = 'https://maps.google.com/maps?f=q&source=s_q&q=buenos+aires&sll=37.0625,-95.677068&sspn=38.638819,80.859375&t=h&hnear=Buenos+Aires,+Argentina&z=11&ll=-34.603723,-58.381593&output=embed';
-    // let cheatUrl = 'https://wesbos-playground--alexandrehak.repl.co';
-    let mapUrl = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
-    // let mapUrl2 = 'https://www.geoportail.gouv.fr/embed/visu.html?c=4.840049084742342,21.060286036654347&z=3&l0=ORTHOIMAGERY.ORTHOPHOTOS:WMTS(1)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes';
-    // let mapUrl3 = "https://www.geoportail.gouv.fr/carte?c=2.630778396286878,47.60731445770401&z=7&l0=OPEN_STREET_MAP::GEOPORTAIL:OGC:WMTS(0.85)&l1=HYDROGRAPHY.HYDROGRAPHY:WMTS(1)&permalink=yes";
-    let iframe = document.createElement('iframe');
-    iframe.width = '600';
-    iframe.height = '400';
-    iframe.frameBorder = '0';
-    iframe.scrolling = 'no';
-    iframe.marginHeight = '0';
-    iframe.marginWidth = '0';
-    // testing
-    iframe.sandbox.toggle('allow-scripts');
-    iframe.sandbox.toggle('allow-same-origin');
-    // iframe.setAttribute('sandbox', 'allow-forms allow-scripts allow-same-origin');
-    // iframe.setAttribute('crossorigin', 'anonymous');
-    iframe.src = mapUrl;
-    iframe.allowFullscreen = true;
-    return iframe;
-  }
-
   public update(options: VisualUpdateOptions) {
     /**
      * [ ] Rename visual (pbiviz.json)
      * [ ] Visual landing page
+     * [ ] Change how moment ticks (use clone instead of incrementing)
      * [?] Add Date filering
      * [X] Display date given as a field when it is provided
      * [?] Support bookmark
@@ -131,7 +98,8 @@ export class Visual implements IVisual {
      * [X] display measure value instead of default "no field value"
      * [?] Change tick functionality / new instance of moment.js each second ?
      * [?] Support more language, date format...
-     * [ ] Remove unused folder (git remove)
+     * [X] Remove unused folder (git remove)
+     * [ ] make format panel more "friendly"
      * --- Capabilities ---
      * [X] Change language
      * [X] Choose font
@@ -149,12 +117,10 @@ export class Visual implements IVisual {
       const dateValue: powerbi.PrimitiveValue = dataView.single.value;
       // console.group('%c Update', 'color: cyan');
       // console.log(this.settings);
-      // const {dateFormat, timeFormat} = this.settings.dateTimeSettings;
       // console.log('dateFormat', dateFormat.toUpperCase());
       // console.log('And I want this', ' LL');
       // console.log('-----------------------------------');
-      // console.log('timeFormat', timeFormat.toUpperCase());
-      // console.log('And I want this', ' LTS');
+      // console.groupEnd()
 
       let updateDateObj = {};
       const dateValueString = dateValue.toString();
@@ -163,17 +129,18 @@ export class Visual implements IVisual {
       if (dateValueString !== this.cachedDate) {
         this.cachedDate = dateValueString;
         const date = new Date(dateValueString);
+        
         // convert utc to locale for powerbi service
         const momentDate = moment(
-          Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds(),
-            date.getMilliseconds()
-          )
+          // date
+          // Date.UTC(
+          //   date.getFullYear(),
+          //   date.getMonth(),
+          //   date.getDate(),
+          //   date.getHours(),
+          //   date.getMinutes(),
+          //   date.getSeconds()
+          // )
         );
 
         if (momentDate.isValid()) {

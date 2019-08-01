@@ -20,30 +20,12 @@ export class Clock extends React.Component<Props, State> {
 
   public componentDidUpdate() {
     // update Date only if display
-    if (this.props.settings.clockSettings.display) {
+    if (this.props.settings.clockSettings.show) {
       this.updateDate(this.props.date);
     }
   }
 
   public updateDate(date) {
-    // select hand
-    // const hours = ((date.hours() + 11) % 12) + 1;
-    // const minutes = date.minutes();
-    // const seconds = date.seconds();
-
-    // const hoursDegrees = hours * 30;
-    // const minutesDegrees = minutes * 6;
-    // const secondsDegrees = seconds * 6;
-    // // console.log(document.querySelector('.hour').setAttribute('data', 'hello worlds'));
-    // document.getElementById(
-    //   'hour'
-    // ).style.transform = `rotate(${hoursDegrees}deg)`;
-    // document.getElementById(
-    //   'minute'
-    // ).style.transform = `rotate(${minutesDegrees}deg)`;
-    // document.getElementById(
-    //   'second'
-    // ).style.transform = `rotate(${secondsDegrees}deg)`;
     const hours = date.hours();
     const minutes = date.minutes();
     const seconds = date.seconds();
@@ -70,7 +52,7 @@ export class Clock extends React.Component<Props, State> {
   }
 
   render() {
-    const { display, backgroundColor, size, hourColor, minuteColor, secondColor } = this.props.settings.clockSettings;
+    const { backgroundColor, size, hourColor, minuteColor, secondColor, show } = this.props.settings.clockSettings;
     // console.log('-------- render date --------');
     // console.log(this.state);
     const containerStyle: React.CSSProperties = {
@@ -92,8 +74,7 @@ export class Clock extends React.Component<Props, State> {
     };
 
     // check if should render
-    if (!display) return false;
-    
+    if (!show) return false;
 
     return (
       <div id="clock-container" style={containerStyle}>

@@ -33,46 +33,60 @@ export class VisualSettings extends DataViewObjectsParser {
   public customVisualSettings: customVisualSettings = new customVisualSettings();
   public clockSettings: clockSettings = new clockSettings();
   public dateTimeSettings: dateTimeSettings = new dateTimeSettings();
+  public timeSettings: timeSettings = new timeSettings();
+  public dateSettings: dateSettings = new dateSettings();
 }
 
 export class customVisualSettings {
+  public itemsPlacement: string = 'row';
   public layout: string = 'space-evenly';
+  public help: boolean = false;
+}
+
+export class timeSettings {
+  public show: boolean = true;
+  public format: string = "LTS";
+  public font: string = "Arial";
+  public size: number = 35;
+  public color: string = '#fff';
+}
+
+export class dateSettings {
+  public show: boolean = true;
+  public format: string = "LL";
+  public font: string = "Arial";
+  public size: number = 20;
+  public color: string = '#fff';
 }
 
 export class dateTimeSettings {
-  // https://momentjs.com/docs/#/i18n/instance-locale/
+  // Display
+  public show: boolean = true;
+
   public locale: string = 'fr';
   public timezone: string = 'Local/Timezone';
-
-  // https://en.wikipedia.org/wiki/Date_format_by_country 
-  public timeFormat: string = "LTS";
-  public dateFormat: string = "LL";
-  // Fonts
-  public fontFamily: string = "Arial";
-  public dateSize: string = '20';
-  public timeSize: string = '35';
-  // public alignment: string = 'Center';
-  public color: string = '#fff';
+  // public displayInformation: boolean = false;
+  
+  // https://momentjs.com/docs/#/i18n/instance-locale/
   public backgroundColor: string = '#222';
   public dateTimeLayout: string = 'column';
   // Sizing and borders
   public width: number = 225;
   public height: number = 145;
-  public border: string = '4px solid cyan';
-  public borderRadius: string = '15px';
-  // Display
-  public displayDate: boolean = true;
-  public displayTime: boolean = true;
-  public displayInformation: boolean = false;
+  // border style
+  public borderWidth: number = 13;
+  public borderStyle: string = 'solid'; 
+  public borderColor: string = '#666';
+  public borderRadius: number = 18;
 }
 
 export class clockSettings {
-  public display: boolean = true;
+  public show: boolean = true;
   // [?] choose clock model
   public predefinedModel: string = 'Classic';
   public backgroundColor: string = '#c8c8c8';
 
-  public size: number = 300;
+  public size: number = 280;
 
   public hourColor: string = '#000';
   public minuteColor: string = '#000';

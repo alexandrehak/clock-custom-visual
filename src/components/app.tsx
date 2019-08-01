@@ -6,6 +6,7 @@ import LandingPage from './landing-page';
 import Date from './date';
 import Clock from './clock';
 import { VisualSettings } from '../settings';
+import { FlexDirectionProperty } from 'csstype';
 
 export interface Props {}
 
@@ -58,18 +59,8 @@ class App extends React.Component<Props, State> {
   }
 
   public updateSettings(settings): void {
-    let { dateFormat, timeFormat, timezone, locale } = settings.dateTimeSettings;
-    // console.group('%c date updateFormating', 'color: greenyellow');
-    // console.log('dateFormat', dateFormat);
-    // console.log('timeFormat', timeFormat);
-    // console.groupEnd();
-    // check if settings has change
-    // console.log('inside update settings', settings);
-    // this.state.date.tz('America/Los_Angeles');
-    // console.log('%c COMPARING', 'color: red; font-size: 20px');
-    // console.log('state', this.state.date);
+    let { timezone, locale } = settings.dateTimeSettings;
     this.updateLocale(locale);
-    // timezone
     this.updateTimezone(timezone);
   }
 
@@ -120,7 +111,9 @@ class App extends React.Component<Props, State> {
     App.updateCallback = (newState: State): void => {
       this.setState(newState, () => {
         // wait for state to be update
-        this.updateSettings(this.state.settings);
+        if (this.state.date) {
+          this.updateSettings(this.state.settings);
+        }
       });
     };
   }
@@ -153,14 +146,15 @@ class App extends React.Component<Props, State> {
   // }
 
   render() {
-    const { layout } = this.state.settings.customVisualSettings;
-
+    const { help, itemsPlacement, layout } = this.state.settings.customVisualSettings;
+    
     const style: React.CSSProperties = {
-      justifyContent: layout
+      justifyContent: layout,
+      flexDirection: itemsPlacement as FlexDirectionProperty
     };
 
     // don't display datetime when no field
-    if (this.state.date === null) {
+    if (this.state.date === null || help) {
       return <LandingPage />;
     }
 

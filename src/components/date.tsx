@@ -17,106 +17,80 @@ class Date extends React.Component<Props, State> {
   }
 
   private formatDate(date) {
-    let formattedString;
-    let { dateFormat } = this.props.settings.dateTimeSettings;
-    
+    let { format } = this.props.settings.dateSettings;
     // [ ] update only if format has been changed
-    // check if is date
-    // if (dateFormat.length === 3) {
-    //   let splittedDate = dateFormat.split('');
-    //   // get year
-    //   let dateFormatObj = {
-    //     y: yearFormat,
-    //     m: 'MM',
-    //     d: 'DD'
-    //   };
-    //   // console.log(this.props.settings.dateTimeSettings);
-    //   // console.group('%c testing time formatting');
-
-    //   // date.locale('en-US')
-    //   // console.log('LT', date.format('LT'));
-    //   // console.log('LTS', date.format('LTS'));
-    //   // console.log('L', date.format('L'));
-    //   // console.log('LL', date.format('LL'));
-    //   // console.log('LLL', date.format('LLL'));
-    //   // console.log('LLLL', date.format('LLLL'));
-
-    //   // console.groupEnd();
-    //   let first = dateFormatObj[splittedDate[0]];
-    //   let second = dateFormatObj[splittedDate[1]];
-    //   let third = dateFormatObj[splittedDate[2]];
-    //   // [ ] check LLL
-    //   formattedString = date.format(first + separator + second + separator + third);
-    //   // console.log('final result', date.format(first + separator + second + separator + third))
-    //   // console.log('splittedDate', splittedDate);
-    //   // console.log(date.format('YYYY/MM/DD'), splittedDate);
-    //   // console.log('local2', date.locale('fr'));
-    //   // console.log('local3', date.format('YYYY MMMM'));
-
-    // } else {
-    // Local Format was chosen
-    // formattedString = dateFormat;
-    // }
-
-    // let format = `${separator}`;
-    // if (date.format()) {
-
-    // }
-    // console.log(formattedString);
     
-    
-    return date.format(dateFormat);
+    return date.format(format);
   }
 
   private formatTime(date) {
-    const timeFormat = this.props.settings.dateTimeSettings.timeFormat;
-    // console.log('%c time formattting', 'color: cyan');
-    // console.log(date.format(timeFormat));
+    const timeFormat = this.props.settings.timeSettings.format;
 
     return date.format(timeFormat);
   }
 
   render() {
+    // react components bag
     const dateTime = [];
+
     const {
       backgroundColor,
-      width,
-      height,
-      border,
+      borderColor,
       borderRadius,
-      displayDate,
-      displayTime,
-      color,
-      fontFamily,
+      borderStyle,
+      borderWidth,
       dateTimeLayout,
-      timeSize,
-      dateSize
+      height,
+      show,
+      width,
     } = this.props.settings.dateTimeSettings;
 
+    const {
+      color: dateColor,
+      font: dateFont,
+      size: dateSize,
+      show: showDate,
+    } = this.props.settings.dateSettings;
+    
+    const {
+      color: timeColor,
+      font: timeFont,
+      size: timeSize,
+      show: showTime,
+    } = this.props.settings.timeSettings;
+
     // check if must display datetime block
-    if (!displayTime && !displayDate) return false;
+    if (!show || !showDate && !showTime) return false;
 
     const dateTimeStyle: React.CSSProperties = {
       width,
       height,
-      border,
+      borderStyle,
       borderRadius,
+      borderColor,
+      borderWidth,
       backgroundColor,
-      color,
-      fontFamily,
-      flexDirection: dateTimeLayout as FlexDirectionProperty
-      // textAlign: alignment
+      flexDirection: dateTimeLayout as FlexDirectionProperty,
+      justifyContent: 'space-evenly'
     };
 
     const timeStyle: React.CSSProperties = {
       fontSize: timeSize + 'px',
+      color: timeColor,
+      fontFamily: timeFont,
+      // set height to 50% if flex direction is column
+      // height: (dateTimeLayout[0] === 'c' ? '50%' : '100%')
     };
-
+    
     const dateStyle: React.CSSProperties = {
       fontSize: dateSize + 'px',
+      color: dateColor,
+      fontFamily: dateFont,
+      // set height to 50% if flex direction is column
+      // height: (dateTimeLayout[0] === 'c' ? '50%' : '100%')
     };
-
-    if (displayTime) {
+    // COME HERE LATER
+    if (showTime) {
       dateTime.push(
         <span className="datetime__time" style={timeStyle}>
           {this.formatTime(this.props.date)}
@@ -124,7 +98,7 @@ class Date extends React.Component<Props, State> {
       );
     }
 
-    if (displayDate) {
+    if (showDate) {
       dateTime.push(
         <span className="datetime__date" style={dateStyle}>
           {this.formatDate(this.props.date)}

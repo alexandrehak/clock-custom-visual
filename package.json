@@ -16,12 +16,12 @@
     "d3": "5.5.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
-    "powerbi-visuals-api": "^2.6.1",
     "powerbi-visuals-utils-dataviewutils": "^2.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "powerbi-visuals-api": "^2.6.1",
     "ts-loader": "5.2.2",
     "typescript": "3.0.1"
   }

@@ -6,10 +6,40 @@
       "kind": "Measure"
     }
   ],
+  "supportsLandingPage": true,
   "objects": {
     "customVisualSettings": {
       "displayName": "Custom Visual Settings",
       "properties": {
+        "help": {
+          "displayName": "Show Help",
+          "type": {
+            "bool": true
+          }
+        },
+        "itemsPlacement": {
+          "displayName": "Items Placement",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "Horizontal Clock and Datetime",
+                "value": "row"
+              },
+              {
+                "displayName": "Horizontal Datetime and Clock",
+                "value": "row-reverse"
+              },
+              {
+                "displayName": "Vertical Clock and Datetime",
+                "value": "column"
+              },
+              {
+                "displayName": "Vertical Datetime and Clock",
+                "value": "column-reverse"
+              }
+            ]
+          }
+        },
         "layout": {
           "displayName": "Layout",
           "description": "Choose how to distributes space between Clock and DateTime",
@@ -36,78 +66,15 @@
         }
       }
     },
-    "dateTimeSettings": {
-      "displayName": "Date Settings",
+    "timeSettings": {
+      "displayName": "Time Settings",
       "properties": {
-        "displayDate": {
-          "displayName": "Display Date",
+        "show": {
+          "description": "Display",
           "type": { "bool": true }
         },
-        "displayTime": {
-          "displayName": "Display Time",
-          "type": { "bool": true }
-        },
-        "dateTimeLayout": {
-          "displayName": "Date and Time Layout",
-          "type": {
-            "enumeration": [
-              {"displayName": "Vertical Time and Date", "value": "column"},
-              {"displayName": "Vertical Date and Time", "value": "column-reverse"},
-              {"displayName": "Horizontal Time and Date", "value": "row"},
-              {"displayName": "Horizontal Date and Time", "value": "row-reverse"}
-            ]
-          }
-        },
-        "timezone": {
-          "displayName": "Timezone",
-          "description": "Select Local Timezone",
-          "type": {
-            "enumeration": [
-              {
-                "displayName": "America/Los_Angeles",
-                "value": "America/Los_Angeles"
-              },
-              { "displayName": "Europe/Paris", "value": "Europe/Paris" },
-              { "displayName": "Europe/London", "value": "Europe/London" },
-              { "displayName": "Asia/Tokyo", "value": "Asia/Tokyo" },
-              { "displayName": "Local/Timezone", "value": "Local/Timezone" }
-            ]
-          }
-        },
-        "locale": {
-          "displayName": "Locale",
-          "type": {
-            "enumeration": [
-              { "displayName": "fr", "value": "fr" },
-              { "displayName": "en", "value": "en" }
-            ]
-          }
-        },
-        "dateFormat": {
-          "displayName": "Date Format",
-          "type": {
-            "enumeration": [
-              {
-                "displayName": "09/04/1986",
-                "value": "L"
-              },
-              {
-                "displayName": "9/4/1986",
-                "value": "l"
-              },
-              {
-                "displayName": "September 4, 1986",
-                "value": "LL"
-              },
-              {
-                "displayName": "Sep 4, 1986",
-                "value": "ll"
-              }
-            ]
-          }
-        },
-        "timeFormat": {
-          "displayName": "Time format",
+        "format": {
+          "displayName": "Format",
           "type": {
             "enumeration": [
               {
@@ -121,20 +88,8 @@
             ]
           }
         },
-        "width": {
-          "displayName": "Width",
-          "type": {
-            "numeric": true
-          }
-        },
-        "height": {
-          "displayName": "Height",
-          "type": {
-            "numeric": true
-          }
-        },
-        "fontFamily": {
-          "displayName": "Font family",
+        "font": {
+          "displayName": "Font",
           "type": {
             "enumeration": [
               {
@@ -239,11 +194,231 @@
         },
         "color": {
           "displayName": "Color",
-          "description": "Choose a color for datetime",
           "type": {
             "fill": {
               "solid": { "color": true }
             }
+          }
+        },
+        "size": {
+          "displayName": "Font Size",
+          "description": "Choose a font size in px",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "dateSettings": {
+      "displayName": "Date Settings",
+      "properties": {
+        "show": {
+          "description": "Display",
+          "type": { "bool": true }
+        },
+        "format": {
+          "displayName": "Format",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "09/04/1986",
+                "value": "L"
+              },
+              {
+                "displayName": "9/4/1986",
+                "value": "l"
+              },
+              {
+                "displayName": "September 4, 1986",
+                "value": "LL"
+              },
+              {
+                "displayName": "Sep 4, 1986",
+                "value": "ll"
+              }
+            ]
+          }
+        },
+        "font": {
+          "displayName": "Font",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "Default",
+                "description": "helvetica, arial, sans-serif",
+                "value": "helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Arial",
+                "value": "Arial"
+              },
+              {
+                "displayName": "Arial Black",
+                "value": "\"Arial Black\""
+              },
+              {
+                "displayName": "Arial Unicode MS",
+                "value": "\"Arial Unicode MS\""
+              },
+              {
+                "displayName": "Calibri",
+                "value": "Calibri"
+              },
+              {
+                "displayName": "Cambria",
+                "value": "Cambria"
+              },
+              {
+                "displayName": "Cambria Math",
+                "value": "\"Cambria Math\""
+              },
+              {
+                "displayName": "Candara",
+                "value": "Candara"
+              },
+              {
+                "displayName": "Comic Sans MS",
+                "value": "\"Comic Sans MS\""
+              },
+              {
+                "displayName": "Consolas",
+                "value": "Consolas"
+              },
+              {
+                "displayName": "Constantia",
+                "value": "Constantia"
+              },
+              {
+                "displayName": "Corbel",
+                "value": "Corbel"
+              },
+              {
+                "displayName": "Courier New",
+                "value": "\"Courier New\""
+              },
+              {
+                "displayName": "Georgia",
+                "value": "Georgia"
+              },
+              {
+                "displayName": "Lucida Sans Unicode",
+                "value": "\"Lucida Sans Unicode\""
+              },
+              {
+                "displayName": "Segoe (Bold)",
+                "value": "\"Segoe UI Bold\", wf_segoe-ui_bold, helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Segoe UI",
+                "value": "\"Segoe UI\", wf_segoe-ui_normal, helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Segoe UI Light",
+                "value": "\"Segoe UI Light\", wf_segoe-ui_bold, helvetica, arial, sans-serif"
+              },
+              {
+                "displayName": "Symbol",
+                "value": "Symbol"
+              },
+              {
+                "displayName": "Tahoma",
+                "value": "Tahoma"
+              },
+              {
+                "displayName": "Times New Roman",
+                "value": "\"Times New Roman\""
+              },
+              {
+                "displayName": "Trebuchet MS",
+                "value": "\"Trebuchet MS\""
+              },
+              {
+                "displayName": "Verdana",
+                "value": "Verdana"
+              },
+              {
+                "displayName": "Wingdings",
+                "value": "Wingdings"
+              }
+            ]
+          }
+        },
+        "color": {
+          "displayName": "Color",
+          "type": {
+            "fill": {
+              "solid": { "color": true }
+            }
+          }
+        },
+        "size": {
+          "displayName": "Font Size",
+          "description": "Choose a font size in px",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "dateTimeSettings": {
+      "displayName": "DateTime Settings",
+      "properties": {
+        "show": {
+          "description": "Display datetime",
+          "type": { "bool": true }
+        },
+        "dateTimeLayout": {
+          "displayName": "Date and Time Layout",
+          "type": {
+            "enumeration": [
+              { "displayName": "Vertical Time and Date", "value": "column" },
+              {
+                "displayName": "Vertical Date and Time",
+                "value": "column-reverse"
+              },
+              { "displayName": "Horizontal Time and Date", "value": "row" },
+              {
+                "displayName": "Horizontal Date and Time",
+                "value": "row-reverse"
+              }
+            ]
+          }
+        },
+        "timezone": {
+          "displayName": "Timezone",
+          "description": "Local Timezone is browser-based",
+          "type": {
+            "enumeration": [
+              {
+                "displayName": "America/Los_Angeles",
+                "value": "America/Los_Angeles"
+              },
+              { "displayName": "Europe/Paris", "value": "Europe/Paris" },
+              { "displayName": "Europe/London", "value": "Europe/London" },
+              { "displayName": "Asia/Tokyo", "value": "Asia/Tokyo" },
+              { "displayName": "Local/Timezone", "value": "Local/Timezone" }
+            ]
+          }
+        },
+        "locale": {
+          "displayName": "Locale",
+          "type": {
+            "enumeration": [
+              { "displayName": "fr", "value": "fr" },
+              { "displayName": "en", "value": "en" }
+            ]
+          }
+        },
+        "width": {
+          "displayName": "Width",
+          "type": {
+            "numeric": true
+          }
+        },
+        "height": {
+          "displayName": "Height",
+          "type": {
+            "numeric": true
           }
         },
         "backgroundColor": {
@@ -254,40 +429,38 @@
             }
           }
         },
-        "border": {
-          "displayName": "Border",
+        "borderWidth": {
+          "displayName": "Border Width",
           "type": {
-            "text": true
+            "numeric": true
+          }
+        },
+        "borderStyle": {
+          "displayName": "Border Style",
+          "type": {
+            "enumeration": [
+              { "displayName": "none", "value": "none" },
+              { "displayName": "dotted", "value": "dotted" },
+              { "displayName": "dashed", "value": "dashed" },
+              { "displayName": "solid", "value": "solid" },
+              { "displayName": "double", "value": "double" },
+              { "displayName": "groove", "value": "groove" },
+              { "displayName": "ridge", "value": "ridge" },
+              { "displayName": "inset", "value": "inset" },
+              { "displayName": "outset", "value": "outset" }
+            ]
+          }
+        },
+        "borderColor": {
+          "displayName": "Border Color",
+          "type": {
+            "fill": { "solid": { "color": true } }
           }
         },
         "borderRadius": {
           "displayName": "Border Radius",
           "type": {
-            "text": true
-          }
-        },
-        "shadow": {
-          "displayName": "Shadow",
-          "type": {
-            "text": true
-          }
-        },
-        "timeSize": {
-          "displayName": "Time Font Size",
-          "description": "Choose a font size in px",
-          "type": {
-            "formatting": {
-              "fontSize": true
-            }
-          }
-        },
-        "dateSize": {
-          "displayName": "Date Font Size",
-          "description": "Choose a font size in px",
-          "type": {
-            "formatting": {
-              "fontSize": true
-            }
+            "numeric": true
           }
         }
       }
@@ -295,10 +468,8 @@
     "clockSettings": {
       "displayName": "Clock Settings",
       "properties": {
-        "display": {
-          "displayName": "Display",
-          "displayNameKey": "Clock_Display",
-          "description": "Toggle clock visibility",
+        "show": {
+          "description": "Display clock",
           "type": { "bool": true }
         },
         "backgroundColor": {

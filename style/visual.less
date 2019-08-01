@@ -112,11 +112,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .datetime__date,
 .datetime__time {
   margin: 0;
-  padding: 10px;
-  font-size: 20px;
+  // padding: 10px;
+  // center text
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // hide overflow text
+  white-space: nowrap;
+  overflow: hidden;
+
 }
