@@ -89,8 +89,8 @@ export class Visual implements IVisual {
   public update(options: VisualUpdateOptions) {
     /**
      * [ ] Rename visual (pbiviz.json)
-     * [ ] Visual landing page
-     * [ ] Change how moment ticks (use clone instead of incrementing)
+     * [X] Visual landing page
+     * [?] Change how moment ticks (use clone instead of incrementing)
      * [?] Add Date filering
      * [X] Display date given as a field when it is provided
      * [?] Support bookmark
@@ -99,7 +99,7 @@ export class Visual implements IVisual {
      * [?] Change tick functionality / new instance of moment.js each second ?
      * [?] Support more language, date format...
      * [X] Remove unused folder (git remove)
-     * [ ] make format panel more "friendly"
+     * [X] make format panel more "friendly"
      * --- Capabilities ---
      * [X] Change language
      * [X] Choose font
@@ -115,12 +115,6 @@ export class Visual implements IVisual {
       );
       const dataView: DataView = options.dataViews[0];
       const dateValue: powerbi.PrimitiveValue = dataView.single.value;
-      // console.group('%c Update', 'color: cyan');
-      // console.log(this.settings);
-      // console.log('dateFormat', dateFormat.toUpperCase());
-      // console.log('And I want this', ' LL');
-      // console.log('-----------------------------------');
-      // console.groupEnd()
 
       let updateDateObj = {};
       const dateValueString = dateValue.toString();
@@ -133,14 +127,14 @@ export class Visual implements IVisual {
         // convert utc to locale for powerbi service
         const momentDate = moment(
           // date
-          // Date.UTC(
-          //   date.getFullYear(),
-          //   date.getMonth(),
-          //   date.getDate(),
-          //   date.getHours(),
-          //   date.getMinutes(),
-          //   date.getSeconds()
-          // )
+          Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+          )
         );
 
         if (momentDate.isValid()) {

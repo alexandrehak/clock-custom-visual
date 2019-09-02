@@ -17,6 +17,12 @@
             "bool": true
           }
         },
+        "useCurrentDateTime": {
+          "displayName": "Use current Date Time",
+          "type": {
+            "bool": true
+          }
+        },
         "itemsPlacement": {
           "displayName": "Items Placement",
           "type": {

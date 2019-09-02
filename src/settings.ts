@@ -41,6 +41,7 @@ export class customVisualSettings {
   public itemsPlacement: string = 'row';
   public layout: string = 'space-evenly';
   public help: boolean = false;
+  // public useCurrentDateTime: boolean = false;
 }
 
 export class timeSettings {

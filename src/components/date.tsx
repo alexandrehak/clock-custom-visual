@@ -78,16 +78,16 @@ class Date extends React.Component<Props, State> {
       fontSize: timeSize + 'px',
       color: timeColor,
       fontFamily: timeFont,
-      // set height to 50% if flex direction is column
-      // height: (dateTimeLayout[0] === 'c' ? '50%' : '100%')
+      // set width to 100% if flex direction is column
+      width: (dateTimeLayout[0] === 'r' ? 'auto' : '100%')
     };
     
     const dateStyle: React.CSSProperties = {
       fontSize: dateSize + 'px',
       color: dateColor,
       fontFamily: dateFont,
-      // set height to 50% if flex direction is column
-      // height: (dateTimeLayout[0] === 'c' ? '50%' : '100%')
+      // set width to 100% if flex direction is column
+      width: (dateTimeLayout[0] === 'r' ? 'auto' : '100%')
     };
     // COME HERE LATER
     if (showTime) {
