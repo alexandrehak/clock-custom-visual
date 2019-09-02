@@ -119,24 +119,25 @@ export class Visual implements IVisual {
       let updateDateObj = {};
       const dateValueString = dateValue.toString();
 
-      // check date validity
+      // update date object only if new field used
       if (dateValueString !== this.cachedDate) {
         this.cachedDate = dateValueString;
         const date = new Date(dateValueString);
         
         // convert utc to locale for powerbi service
-        const momentDate = moment(
-          // date
-          Date.UTC(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds()
-          )
-        );
-
+        const momentDate = moment();
+        
+        // Date based on field
+        // Date.UTC(
+        //   date.getFullYear(),
+        //   date.getMonth(),
+        //   date.getDate(),
+        //   date.getHours(),
+        //   date.getMinutes(),
+        //   date.getSeconds()
+        // )
+          
+        // check date validity
         if (momentDate.isValid()) {
           updateDateObj['date'] = momentDate;
         } else {
