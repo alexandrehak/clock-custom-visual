@@ -488,7 +488,7 @@
         },
         "size": {
           "displayName": "Size",
-          "description": "Minimum is 200",
+          "description": "Minimum is 100",
           "type": {
             "numeric": true
           }
