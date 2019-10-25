@@ -11,7 +11,7 @@
   },
   "apiVersion": "2.6.0",
   "author": { "name": "Alexandre Hak", "email": "ahak@expertime.com" },
-  "assets": { "icon": "assets/icon.png" },
+  "assets": { "icon": "assets/faviconPowerBI.png" },
   "externalJS": [],
   "style": "style/visual.less",
   "capabilities": "capabilities.json",
